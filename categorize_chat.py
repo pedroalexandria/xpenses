@@ -11,7 +11,16 @@ import pandas as pd
 openai.api_key = "SUA_API_KEY_OPENAI"
 
 # Configuração do caminho para o arquivo de credenciais
-SERVICE_ACCOUNT_FILE = "/Users/pedroalexandria/meu_ambiente/planilha-de-gastos.json"
+import os
+import json
+
+# Carregar o JSON da variável de ambiente
+SERVICE_ACCOUNT_JSON = os.getenv("SERVICE_ACCOUNT_JSON")
+
+# Configurar as credenciais usando o JSON carregado
+creds = service_account.Credentials.from_service_account_info(
+    json.loads(SERVICE_ACCOUNT_JSON)
+)
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
 
 SPREADSHEET_ID = "SEU_SPREADSHEET_ID"  # Substitua pelo ID da sua planilha
